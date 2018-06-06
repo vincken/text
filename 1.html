@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字体渲染异常</title>
+	<style>
+		@font-face {
+		    font-family: 'Sans';
+		    src: url('./OpenSans-Regular.ttf');
+		}
+		.normal, .wrong{
+			font-style: italic;
+			font-weight: bold;
+		}
+		.wrong{
+			font-family: Sans;
+		}
+	</style>
+</head>
+<body>
+	<div>系统自带字体渲染正常：</div>
+	<div class="normal">hello world</div>
+	<br>
+	<div>Web字体渲染不正常(加粗和斜体没效果)</div>
+	<div class="wrong">hello world</div>
+	<br>
+	<div>canvas中也一样：</div>
+	<canvas id="c"></canvas>
+	<script>
+		window.onload = () => {
+			let canvas = document.getElementById('c');
+			let ctx = canvas.getContext('2d');
+			ctx.font = "bold italic 30px SimHei"; 
+			ctx.fillText('hello world',0,30);
+
+			ctx.font = "bold italic 30px Sans"; 
+			ctx.fillText('hello world',0,60);
+		}
+	</script>
+</body>
+</html>
